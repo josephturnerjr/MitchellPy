@@ -8,19 +8,24 @@ def find_s(examples):
     '''
     # length of the hypothesis
     hyp_length = len(examples[0][1])
-    # initialize to the most specific hypothesis
-    h = [] 
-    for i in range(hyp_length):
-        h.append([])
+    # initialize to the most specific hypothesis (none accepted)
+    h = [[] for x in range(hyp_length)] 
+    # Only examine the positive instances, the negative ones
+    #   are already covered by the restrictive (specific) initial hypothesis
     positive_instances = [x[1] for x in  examples if x[0]]
     for x in positive_instances:
         for i in range(len(h)):
+            # Add the values in the positive instances to the set of accepted for each attribute
             if x[i] not in h[i]:
                 h[i].append(x[i])
 
     return h
 
+
 def enjoy_sport():
+    '''
+    This is the worked example from the book
+    '''
     examples = [
                 (True, ['sunny', 'warm', 'normal', 'strong', 'warm', 'same']),    
                 (True, ['sunny', 'warm', 'high', 'strong', 'warm', 'same']),    
@@ -28,7 +33,6 @@ def enjoy_sport():
                 (True, ['sunny', 'warm', 'high', 'strong', 'cool', 'change'])
                ]
     print find_s(examples)
-
 
 
 if __name__ == "__main__":
